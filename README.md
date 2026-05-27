@@ -1,6 +1,6 @@
-# bitcoin-shard-manifest-helm
+# shard-manifest-helm
 
-Helm chart for [`bitcoin-shard-manifest`](https://github.com/lightwebinc/bitcoin-shard-manifest)
+Helm chart for [`shard-manifest`](https://github.com/lightwebinc/shard-manifest)
 — the BRC-137 Shard Manifest Announcement Daemon.
 
 The daemon periodically multicasts a small datagram to the IPv6 beacon
@@ -11,9 +11,9 @@ informational and does not subscribe to or interpret data-plane traffic.
 ## Quick start
 
 ```bash
-helm install my-manifest oci://ghcr.io/lightwebinc/charts/bitcoin-shard-manifest \
+helm install my-manifest oci://ghcr.io/lightwebinc/charts/shard-manifest \
   --version 0.1.0 \
-  --namespace bitcoin-mcast --create-namespace \
+  --namespace bsv-mcast --create-namespace \
   --set manifest.shardBits=4 \
   --set manifest.joinedGroups=all \
   --set manifest.roleHint=proxy

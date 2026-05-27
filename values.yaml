@@ -1,4 +1,4 @@
-# Default values for bitcoin-shard-manifest.
+# Default values for shard-manifest.
 #
 # The daemon is configured exclusively via environment variables. Each
 # values key maps to a single MANIFEST_* env var and must agree with the
@@ -7,7 +7,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/lightwebinc/bitcoin-shard-manifest
+  repository: ghcr.io/lightwebinc/shard-manifest
   pullPolicy: IfNotPresent
   tag: ""
 
@@ -46,7 +46,7 @@ networking:
   mode: pod
   multus:
     networkName: mcast-fabric
-    namespace: bitcoin-mcast
+    namespace: bsv-mcast
     fabricIPv6: ""
     interface: net1
   host:

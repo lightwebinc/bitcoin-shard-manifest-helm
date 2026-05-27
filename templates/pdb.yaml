@@ -2,12 +2,12 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: {{ include "bitcoin-shard-manifest.fullname" . }}
+  name: {{ include "shard-manifest.fullname" . }}
   labels:
-    {{- include "bitcoin-shard-manifest.labels" . | nindent 4 }}
+    {{- include "shard-manifest.labels" . | nindent 4 }}
 spec:
   minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
   selector:
     matchLabels:
-      {{- include "bitcoin-shard-manifest.selectorLabels" . | nindent 6 }}
+      {{- include "shard-manifest.selectorLabels" . | nindent 6 }}
 {{- end }}

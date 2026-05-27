@@ -1,8 +1,8 @@
-{{- define "bitcoin-shard-manifest.name" -}}
+{{- define "shard-manifest.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.fullname" -}}
+{{- define "shard-manifest.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -15,33 +15,33 @@
 {{- end -}}
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.chart" -}}
+{{- define "shard-manifest.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.labels" -}}
-helm.sh/chart: {{ include "bitcoin-shard-manifest.chart" . }}
-{{ include "bitcoin-shard-manifest.selectorLabels" . }}
+{{- define "shard-manifest.labels" -}}
+helm.sh/chart: {{ include "shard-manifest.chart" . }}
+{{ include "shard-manifest.selectorLabels" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-app.kubernetes.io/part-of: bitcoin-multicast
+app.kubernetes.io/part-of: bsv-multicast
 app.kubernetes.io/component: manifest
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "bitcoin-shard-manifest.name" . }}
+{{- define "shard-manifest.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "shard-manifest.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.serviceAccountName" -}}
+{{- define "shard-manifest.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-{{- default (include "bitcoin-shard-manifest.fullname" .) .Values.serviceAccount.name -}}
+{{- default (include "shard-manifest.fullname" .) .Values.serviceAccount.name -}}
 {{- else -}}
 {{- default "default" .Values.serviceAccount.name -}}
 {{- end -}}
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.multusAnnotation" -}}
+{{- define "shard-manifest.multusAnnotation" -}}
 {{- if eq .Values.networking.mode "multus" -}}
 k8s.v1.cni.cncf.io/networks: |
   [{
@@ -60,7 +60,7 @@ Container env list. Each entry maps to a manifest daemon environment
 variable; empty / zero values are emitted so the daemon falls back to its
 hard-coded default.
 */}}
-{{- define "bitcoin-shard-manifest.env" -}}
+{{- define "shard-manifest.env" -}}
 - name: SHARD_BITS
   value: {{ .Values.manifest.shardBits | quote }}
 - name: JOINED_GROUPS
@@ -97,8 +97,8 @@ hard-coded default.
   value: {{ default "" .Values.manifest.instanceId | quote }}
 {{- end -}}
 
-{{- define "bitcoin-shard-manifest.podSpec" -}}
-serviceAccountName: {{ include "bitcoin-shard-manifest.serviceAccountName" . }}
+{{- define "shard-manifest.podSpec" -}}
+serviceAccountName: {{ include "shard-manifest.serviceAccountName" . }}
 {{- with .Values.imagePullSecrets }}
 imagePullSecrets:
   {{- toYaml . | nindent 2 }}
@@ -127,7 +127,7 @@ containers:
         containerPort: {{ .Values.metrics.port }}
         protocol: TCP
     env:
-      {{- include "bitcoin-shard-manifest.env" . | nindent 6 }}
+      {{- include "shard-manifest.env" . | nindent 6 }}
       {{- with .Values.extraEnv }}
       {{- toYaml . | nindent 6 }}
       {{- end }}

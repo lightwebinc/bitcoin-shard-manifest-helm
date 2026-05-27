@@ -1,11 +1,11 @@
-bitcoin-shard-manifest-helm
+shard-manifest-helm
 Copyright 2026 Lightweb Inc. (https://lightweb.net)
 
 =========================================================================
 
-This Helm chart deploys `bitcoin-shard-manifest` — the BRC-137 Shard
+This Helm chart deploys `shard-manifest` — the BRC-137 Shard
 Manifest Announcement Daemon — into a Kubernetes cluster. It is the
-sibling deployment of `bitcoin-manifest` (Ansible-based VM deployment).
+sibling deployment of `manifest-infra` (Ansible-based VM deployment).
 
 This product includes software developed at Lightweb Inc. and licensed
 under the Apache License, Version 2.0 (see LICENSE).
