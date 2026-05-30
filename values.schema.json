@@ -50,7 +50,10 @@
         "iface": { "type": "string" },
         "announceInterval": { "type": "string" },
         "ttl": { "type": "string" },
-        "debug": { "type": "boolean" }
+        "debug": { "type": "boolean" },
+        "sourceMode": { "type": "string", "enum": ["asm", "ssm"] },
+        "publishers": { "type": "array", "items": { "type": "string" } },
+        "publishersRefresh": { "type": "string" }
       }
     },
     "metrics": {

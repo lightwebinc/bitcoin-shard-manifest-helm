@@ -79,6 +79,16 @@ hard-coded default.
   value: {{ .Values.manifest.port | quote }}
 - name: MC_GROUP_ID
   value: {{ .Values.manifest.mcGroupId | quote }}
+- name: SOURCE_MODE
+  value: {{ .Values.manifest.sourceMode | default "asm" | quote }}
+{{- if .Values.manifest.publishers }}
+- name: PUBLISHERS
+  value: {{ join "," .Values.manifest.publishers | quote }}
+{{- end }}
+{{- if .Values.manifest.publishersRefresh }}
+- name: PUBLISHERS_REFRESH
+  value: {{ .Values.manifest.publishersRefresh | quote }}
+{{- end }}
 - name: IFACE
   value: {{ .Values.manifest.iface | quote }}
 - name: ANNOUNCE_INTERVAL
